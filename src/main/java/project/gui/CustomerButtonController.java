@@ -5,9 +5,6 @@
  */
 package project.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,20 +14,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * FXML Controller class
  *
  * @author thomasoosterlinck
  */
 public class CustomerButtonController implements Initializable {
-    
+
     @FXML
     void AddNewCustomer(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddNewCustomer.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
     }
@@ -40,8 +41,8 @@ public class CustomerButtonController implements Initializable {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("DeleteCustomer.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
     }
@@ -51,8 +52,8 @@ public class CustomerButtonController implements Initializable {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("ModifyCustomer.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
     }
@@ -62,8 +63,8 @@ public class CustomerButtonController implements Initializable {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("RetrieveCustomer.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
     }
@@ -73,8 +74,8 @@ public class CustomerButtonController implements Initializable {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("SeeAllCustomers.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
 
@@ -86,6 +87,6 @@ public class CustomerButtonController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }

@@ -1,11 +1,5 @@
 package project.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,33 +9,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import project.db.DBException;
+import project.logic.Airport;
 import project.logic.Booking;
 import project.logic.Customer;
-import project.logic.Airport;
 import project.logic.Flight;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * FXML Controller class
  *
  * @author Gert-Jan
  */
-public class BookingButtonController implements Initializable {       
+public class BookingButtonController implements Initializable {
 
     @FXML
     private DatePicker datePicker;
@@ -81,7 +73,7 @@ public class BookingButtonController implements Initializable {
     private Button ProceedBtn;
     @FXML
     private Button ShowPossFlightsBtn;
-    
+
     private ObservableList<Booking> possibleFlights;
     private ObservableList<String> depAirportsList;
     private ObservableList<String> arrAirportsList;
@@ -94,31 +86,31 @@ public class BookingButtonController implements Initializable {
     private LocalDate dateOfDeparture, dateOfArrival, dateOfDeparture2, dateOfDeparture3;
     String depAirportCode, arrAirportCode;
 
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         rbPrice.setSelected(true);
         FlightDetailsButton.setDisable(true);
         ProceedBtn.setDisable(true);
         ShowPossFlightsBtn.setDisable(true);
-        
+
         Airport airport = new Airport();
-        depAirportsList = FXCollections.observableArrayList( airport.getAirportNames() );
-        arrAirportsList = FXCollections.observableArrayList( airport.getAirportNames() );
+        depAirportsList = FXCollections.observableArrayList(airport.getAirportNames());
+        arrAirportsList = FXCollections.observableArrayList(airport.getAirportNames());
         depAirportBox.setItems(depAirportsList);
         arrAirportBox.setItems(arrAirportsList);
-        
-        DepartureDateCol.setCellValueFactory(new PropertyValueFactory<> ("dateOfDeparture"));
-        ArrivalDateCol.setCellValueFactory(new PropertyValueFactory<> ("dateOfArrival"));
-        PriceCol.setCellValueFactory(new PropertyValueFactory<> ("totalPrice"));
-        CO2Col.setCellValueFactory(new PropertyValueFactory<> ("totaleuitstoot"));
-        DurationCol.setCellValueFactory(new PropertyValueFactory<> ("totalDuration"));
-        TransfersCol.setCellValueFactory(new PropertyValueFactory<> ("totalTransfers"));
-        
+
+        DepartureDateCol.setCellValueFactory(new PropertyValueFactory<>("dateOfDeparture"));
+        ArrivalDateCol.setCellValueFactory(new PropertyValueFactory<>("dateOfArrival"));
+        PriceCol.setCellValueFactory(new PropertyValueFactory<>("totalPrice"));
+        CO2Col.setCellValueFactory(new PropertyValueFactory<>("totaleuitstoot"));
+        DurationCol.setCellValueFactory(new PropertyValueFactory<>("totalDuration"));
+        TransfersCol.setCellValueFactory(new PropertyValueFactory<>("totalTransfers"));
+
         table.setRowFactory(tbl -> {
             TableRow<Booking> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Booking rowData = row.getItem();
                     boeking = rowData;
                     loadCustomerLabel.setText("Selected: FlightNr " + rowData.getFlightNR());
@@ -126,15 +118,15 @@ public class BookingButtonController implements Initializable {
                     ProceedBtn.setDisable(false);
                 }
             });
-            return row ;
+            return row;
         });
     }
-    
+
     public void initCustomer(Customer customer) {
         loadedCustomer = customer;
-        loadCustomerLabel.setText("Customer: " + loadedCustomer.getFirstName() + loadedCustomer.getLastName() );
+        loadCustomerLabel.setText("Customer: " + loadedCustomer.getFirstName() + loadedCustomer.getLastName());
     }
-       
+
     @FXML
     private void ProceedBooking(ActionEvent event) throws IOException, SQLException {
         vluchtnr = boeking.getFlightNR();
@@ -149,23 +141,23 @@ public class BookingButtonController implements Initializable {
         dateOfArrival = boeking.getDateOfArrival();
         dateOfDeparture2 = boeking.getDateOfDeparture2();
         dateOfDeparture3 = boeking.getDateOfDeparture3();
-        
+
         Booking loadedBooking = new Booking(vluchtnr, loadedCodeOfDep, loadedCodeOfArr, CO2,
                 duration, price, totalDistance, totalNRTransfers, dateOfDeparture, dateOfArrival,
-                dateOfDeparture2,dateOfDeparture3);
-                
+                dateOfDeparture2, dateOfDeparture3);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("SaveBooking.fxml"));
         Parent tableViewParent = loader.load();
-        
+
         SaveBookingController savebookingcontroller = loader.getController();
         savebookingcontroller.initCustomerBookingSaveBooking(loadedCustomer, loadedBooking);
-        
+
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
-   
+
     }
 
     @FXML
@@ -182,18 +174,18 @@ public class BookingButtonController implements Initializable {
         dateOfArrival = boeking.getDateOfArrival();
         dateOfDeparture2 = boeking.getDateOfDeparture2();
         dateOfDeparture3 = boeking.getDateOfDeparture3();
-        
+
         Booking loadedBooking = new Booking(vluchtnr, loadedCodeOfDep, loadedCodeOfArr, CO2,
                 duration, price, totalDistance, totalNRTransfers, dateOfDeparture, dateOfArrival,
-                dateOfDeparture2,dateOfDeparture3);
-                
+                dateOfDeparture2, dateOfDeparture3);
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("FlightDetails.fxml"));
         Parent tableViewParent = loader.load();
-        
+
         FlightDetailsController flightdetailscontroller = loader.getController();
         flightdetailscontroller.initCustomerBooking(loadedCustomer, loadedBooking);
-        
+
         Scene tableViewScene = new Scene(tableViewParent);
         //Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         Stage stage = new Stage();
@@ -209,7 +201,7 @@ public class BookingButtonController implements Initializable {
         String depAirportName = depAirportBox.getValue();
         String arrAirportName = arrAirportBox.getValue();
         LocalDate date = datePicker.getValue();
-        String DateOfDep  = date.toString();
+        String DateOfDep = date.toString();
         depAirportCode = airport.getAirportCodeDepName(depAirportName);
         arrAirportCode = airport.getAirportCodeDepName(arrAirportName);
         Booking boeking = new Booking(depAirportCode, arrAirportCode, date);
@@ -227,33 +219,33 @@ public class BookingButtonController implements Initializable {
             table.getSortOrder().add(CO2Col);
         } else {
             table.getSortOrder().add(DurationCol);
-        }                
+        }
     }
-    
+
     @FXML
     private void checkInputsKey(KeyEvent event) {
-        if(depAirportBox.getValue() == null || arrAirportBox.getValue() == null || datePicker.getValue() == null ) {
+        if (depAirportBox.getValue() == null || arrAirportBox.getValue() == null || datePicker.getValue() == null) {
             ShowPossFlightsBtn.setDisable(true);
         } else {
             ShowPossFlightsBtn.setDisable(false);
-        } 
+        }
 
     }
-    
+
     @FXML
     private void checkInputsMouse(MouseEvent event) {
-        if(depAirportBox.getValue() == null || arrAirportBox.getValue() == null || datePicker.getValue() == null ){
+        if (depAirportBox.getValue() == null || arrAirportBox.getValue() == null || datePicker.getValue() == null) {
             ShowPossFlightsBtn.setDisable(true);
         } else {
             ShowPossFlightsBtn.setDisable(false);
         }
     }
-  
+
     @FXML
-    public void GoHome(ActionEvent event) throws IOException{
+    public void GoHome(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }

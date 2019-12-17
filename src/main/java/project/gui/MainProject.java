@@ -5,11 +5,7 @@
  */
 package project.gui;
 
-import java.sql.Connection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,13 +14,18 @@ import javafx.stage.Stage;
 import project.db.DBConnector;
 import project.db.DBException;
 
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static javafx.application.Application.launch;
+
 /**
- *
  * @author thomasoosterlinck
  */
 public class MainProject extends Application {
     public static Connection con = null;
-     
+
     @Override
     public void start(Stage stage) throws Exception {
         try {
@@ -32,14 +33,14 @@ public class MainProject extends Application {
         } catch (DBException ex) {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         System.out.println("Model set");
-        Parent root = FXMLLoader.load(getClass().getResource("WelkomScene.fxml"));        
-        Scene scene = new Scene(root);  
+        Parent root = FXMLLoader.load(getClass().getResource("WelkomScene.fxml"));
+        Scene scene = new Scene(root);
         stage.getIcons().add(new Image("/project/images/aroundTheGlobeGreen.png"));
         stage.setTitle("CleanFlight");
         stage.setScene(scene);
-        stage.show();        
+        stage.show();
     }
 
     /**
@@ -47,5 +48,5 @@ public class MainProject extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }    
+    }
 }

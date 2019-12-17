@@ -5,33 +5,30 @@
  */
 package project.db;
 
-import project.logic.Airplane;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import project.gui.MainProject;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 /**
- *
  * @author Gunter
  */
 public class DBAirplane {
-    
+
     public static int getMaxSeats(String at) throws DBException {
-        
+
         try {
-            
+
             Statement stmt = MainProject.con.createStatement();
-            
+
             String sql = "SELECT maxSeats "
-            + "FROM airplanes "
-            + "WHERE airplaneType = '" + at + "'";
-            
+                    + "FROM airplanes "
+                    + "WHERE airplaneType = '" + at + "'";
+
             ResultSet srs = stmt.executeQuery(sql);
             int maxSeats = 0;
-            
-            while(srs.next()){
+
+            while (srs.next()) {
                 maxSeats = srs.getInt("maxSeats");
             }
             return maxSeats;

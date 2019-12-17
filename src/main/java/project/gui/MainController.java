@@ -5,11 +5,6 @@
  */
 package project.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,63 +17,45 @@ import javafx.stage.Stage;
 import project.db.DBConnector;
 import project.db.DBException;
 import project.logic.Customer;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
- *
  * @author thomasoosterlinck
  */
 public class MainController implements Initializable {
-    
-    private Customer customer;  
-    
+
+    private Customer customer;
+
     @FXML
     private AnchorPane AnchorPane;
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
-        customer = Customer.getInstance();        
-    }    
-    
+    public void initialize(URL url, ResourceBundle rb) {
+        customer = Customer.getInstance();
+    }
+
     @FXML
-    void StartProgram(ActionEvent event) throws IOException, DBException{        
+    void StartProgram(ActionEvent event) throws IOException, DBException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
-    }    
+    }
 
     @FXML
     private void BookingButton(ActionEvent event) {
-    try{
-      Parent tableViewParent = FXMLLoader.load(getClass().getResource("BookingButton.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(tableViewScene);
-        window.show();
-
-    } catch (IOException ex) {
-      Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }
-
-    @FXML
-    void CustomerButton(ActionEvent event) {
-        try{
-        AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("CustomerButton.fxml"));
-        AnchorPane.getChildren().setAll(pane);
-    } catch (IOException ex) {
-      Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
-      }
-    }
-
-    @FXML
-    void ReportButton(ActionEvent event){
-        try{
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("RetrieveCustomerReport.fxml"));
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("BookingButton.fxml"));
             Scene tableViewScene = new Scene(tableViewParent);
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
             window.show();
 
@@ -88,14 +65,38 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void SalesReportButton(ActionEvent event){
-    }  
+    void CustomerButton(ActionEvent event) {
+        try {
+            AnchorPane pane = (AnchorPane) FXMLLoader.load(getClass().getResource("CustomerButton.fxml"));
+            AnchorPane.getChildren().setAll(pane);
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     @FXML
-    private void Exit(ActionEvent event) throws DBException {        
+    void ReportButton(ActionEvent event) {
+        try {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("RetrieveCustomerReport.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+
+        } catch (IOException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @FXML
+    void SalesReportButton(ActionEvent event) {
+    }
+
+    @FXML
+    private void Exit(ActionEvent event) throws DBException {
         DBConnector.closeConnection(MainProject.con);
-        System.exit(0);        
-    }   
+        System.exit(0);
+    }
 }      
     
 

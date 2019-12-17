@@ -6,9 +6,8 @@
 package project.logic;
 
 /**
- *
  * @author Gert-Jan
  */
 public class Airplane {
-    
+
 }

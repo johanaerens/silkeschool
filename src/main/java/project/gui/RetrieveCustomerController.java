@@ -5,11 +5,6 @@
  */
 package project.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,13 +19,19 @@ import javafx.stage.Stage;
 import project.db.DBException;
 import project.logic.Customer;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * FXML Controller class
  *
  * @author thomasoosterlinck
  */
 public class RetrieveCustomerController implements Initializable {
-     
+
     @FXML
     private TextField nameField;
     @FXML
@@ -45,18 +46,18 @@ public class RetrieveCustomerController implements Initializable {
     private Label dataLabel;
     @FXML
     private Label showDataLabel;
-    
+
     private Customer customer;
     Customer klant;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        customer = Customer.getInstance();        
-    }  
-    
+        customer = Customer.getInstance();
+    }
+
     @FXML
     private void CheckButton(ActionEvent event) {
         try {
@@ -66,28 +67,27 @@ public class RetrieveCustomerController implements Initializable {
             String firstName = firstNameField.getText();
             String dateOfBirth = bdayPicker.getValue().toString();
             klant = new Customer(firstName, name, dateOfBirth);
-            
-            if(klant.bestaatDeCustomer(klant)){
-                customerFoundlabel.setText("Customer found!");  
+
+            if (klant.bestaatDeCustomer(klant)) {
+                customerFoundlabel.setText("Customer found!");
                 dataLabel.setText("Data customer " + firstName + " " + name);
-                showDataLabel.setText(Customer.getCustomer(firstName, name, dateOfBirth).toString());                
-            }
-            else
+                showDataLabel.setText(Customer.getCustomer(firstName, name, dateOfBirth).toString());
+            } else
                 labelFout.setText("Error! Customer  not found, go back");
         } catch (DBException ex) {
             Logger.getLogger(ModifyCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
     }
-    
+
     @FXML
-    private void HomeButton(ActionEvent event) throws IOException{
+    private void HomeButton(ActionEvent event) throws IOException {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         window.setScene(tableViewScene);
         window.show();
     }
- 
+
 }

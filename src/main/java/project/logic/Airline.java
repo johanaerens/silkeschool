@@ -4,12 +4,10 @@
  * and open the template in the editor.
  */
 package project.logic;
-import project.db.DBAirline;
 
 /**
- *
  * @author Gert-Jan
  */
 public class Airline {
-    
+
 }

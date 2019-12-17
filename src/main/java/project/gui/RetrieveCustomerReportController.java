@@ -5,11 +5,6 @@
  */
 package project.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +18,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import project.db.DBException;
 import project.logic.Customer;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -45,7 +46,7 @@ public class RetrieveCustomerReportController implements Initializable {
     private Label dataLabel;
     @FXML
     private Label showDataLabel;
-    
+
     private Customer customer;
     Customer klant;
 
@@ -54,8 +55,8 @@ public class RetrieveCustomerReportController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        customer = Customer.getInstance();     
-    }    
+        customer = Customer.getInstance();
+    }
 
     @FXML
     private void CheckButton(ActionEvent event) {
@@ -66,24 +67,23 @@ public class RetrieveCustomerReportController implements Initializable {
             String firstName = firstNameField.getText();
             String dateOfBirth = bdayPicker.getValue().toString();
             klant = new Customer(firstName, name, dateOfBirth);
-            
-            if(klant.bestaatDeCustomer(klant)){
-                customerFoundlabel.setText("Customer found!");  
+
+            if (klant.bestaatDeCustomer(klant)) {
+                customerFoundlabel.setText("Customer found!");
                 dataLabel.setText("Data customer " + firstName + " " + name);
-                showDataLabel.setText(Customer.getCustomer(firstName, name, dateOfBirth).toString());                
-            }
-            else
+                showDataLabel.setText(Customer.getCustomer(firstName, name, dateOfBirth).toString());
+            } else
                 labelFout.setText("Error! Customer  not found, go back");
         } catch (DBException ex) {
             Logger.getLogger(ModifyCustomerController.class.getName()).log(Level.SEVERE, null, ex);
-        }  
+        }
     }
 
     @FXML
     private void HomeButton(ActionEvent event) throws IOException {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPane.fxml"));        
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();        
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }
@@ -91,18 +91,18 @@ public class RetrieveCustomerReportController implements Initializable {
 
     @FXML
     private void GetReport(ActionEvent event) throws IOException {
-                
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("CustomerReport.fxml"));
         Parent tableViewParent = loader.load();
-        
+
         CustomerReportController customerreportcontroller = loader.getController();
         customerreportcontroller.initCustomer(klant);
-            
+
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
     }
-    
+
 }

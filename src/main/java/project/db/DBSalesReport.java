@@ -6,13 +6,13 @@
 package project.db;
 
 /**
- *
  * @author Gunter
  */
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 /**
  *
  * @author Pieter
@@ -23,15 +23,15 @@ public class DBSalesReport {
         try {
             con = DBConnector.getConnection();
             Statement stmt = con.createStatement();
-            
+
             String sql = "SELECT sum(price) AS totalprijs "
-            + "FROM bookings "
-            + "WHERE dateOfBooking like '" + jaar +"_" + maand + "___' ";
-            
+                    + "FROM bookings "
+                    + "WHERE dateOfBooking like '" + jaar + "_" + maand + "___' ";
+
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             double totprijs = 0;
-            if(srs.next())
+            if (srs.next())
                 totprijs = srs.getDouble("totalprijs");
             return totprijs;
         } catch (Exception ex) {
@@ -39,21 +39,21 @@ public class DBSalesReport {
             throw new DBException(ex);
         }
     }
-     
+
     public static double getTotalPricePerYear(int jaar) throws DBException {
         Connection con = null;
         try {
             con = DBConnector.getConnection();
             Statement stmt = con.createStatement();
-            
+
             String sql = "SELECT sum(price) AS totalprijs "
-            + "FROM bookings "
-            + "WHERE dateOfBooking like '" + jaar +"______'";
-            
+                    + "FROM bookings "
+                    + "WHERE dateOfBooking like '" + jaar + "______'";
+
             ResultSet srs = stmt.executeQuery(sql);
-            
+
             double totprijs = 0;
-            if(srs.next())
+            if (srs.next())
                 totprijs = srs.getDouble("totalprijs");
             return totprijs;
         } catch (Exception ex) {
@@ -61,9 +61,9 @@ public class DBSalesReport {
             throw new DBException(ex);
         }
     }
-    
-    
-    public static void main(String[] ars) throws DBException{
+
+
+    public static void main(String[] ars) throws DBException {
         double prijs = getTotalPricePerYear(2019);
         System.out.println(prijs);
     }

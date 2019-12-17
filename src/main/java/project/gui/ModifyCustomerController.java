@@ -5,12 +5,6 @@
  */
 package project.gui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +18,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import project.db.DBException;
 import project.logic.Customer;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * FXML Controller class
@@ -36,7 +36,7 @@ import project.logic.Customer;
  */
 public class ModifyCustomerController implements Initializable {
     private Customer customer;
-    
+
     @FXML
     private TextField nameField;
     @FXML
@@ -61,8 +61,8 @@ public class ModifyCustomerController implements Initializable {
     private Button ModifyBookBtn;
     @FXML
     private Button ModifyBtn;
-    
-    
+
+
     /**
      * Initializes the controller class.
      */
@@ -72,12 +72,13 @@ public class ModifyCustomerController implements Initializable {
         CheckBtn.setDisable(true);
         ModifyBtn.setDisable(true);
         ModifyBookBtn.setDisable(true);
-    } 
-    
+    }
+
     Customer klant;
+
     @FXML
     private void CheckCustomer(ActionEvent event) throws IOException {
-        
+
         try {
             labelFound.setText("");
             labelFout.setText("");
@@ -85,55 +86,54 @@ public class ModifyCustomerController implements Initializable {
             String firstName = firstNameField.getText();
             String dateOfBirth = bdayPicker.getValue().toString();
             klant = new Customer(firstName, name, dateOfBirth);
-            
-            if(klant.bestaatDeCustomer(klant)){
-                labelFound.setText("Customer found!");                
-            }
-            else
+
+            if (klant.bestaatDeCustomer(klant)) {
+                labelFound.setText("Customer found!");
+            } else
                 labelFout.setText("Fout! Customer niet gevonden, go back");
         } catch (DBException ex) {
             Logger.getLogger(ModifyCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
-    private void Modify(ActionEvent event) throws DBException, SQLException{
+    private void Modify(ActionEvent event) throws DBException, SQLException {
         try {
             String name = ChangeName.getText();
             String firstName = ChangeFirstName.getText();
             String changeCountry = ChangeCountry.getText();
             String passport = ChangePassport.getText();
-            
-            
-            if(!(name.equals(""))){                
-                klant.changeCustomerLastName(name);                
+
+
+            if (!(name.equals(""))) {
+                klant.changeCustomerLastName(name);
             }
-            if(!(firstName.equals("")))
+            if (!(firstName.equals("")))
                 klant.changeCustomerFirstName(firstName);
-            if(!(changeCountry.equals("")))
+            if (!(changeCountry.equals("")))
                 klant.changeCountry(changeCountry);
-            if(!(passport.equals("")))
+            if (!(passport.equals("")))
                 klant.changePaspoort(passport);
-            
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("Gelukt.fxml"));            
-            Scene tableViewScene = new Scene(tableViewParent);            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();            
+
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("Gelukt.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
             window.show();
         } catch (IOException ex) {
             Logger.getLogger(ModifyCustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @FXML
     private void GoHome(ActionEvent event) throws IOException {
-        
+
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("MainPane.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
-        
+
     }
 
     @FXML
@@ -145,48 +145,48 @@ public class ModifyCustomerController implements Initializable {
         String pasport = klant.getPasportNR();
         Customer klant = new Customer(name, firstName, dateOfBirth, country, pasport);
         klant.addCustomer(klant);
-        
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("BookingButton.fxml"));
         Parent tableViewParent = loader.load();
-            
+
         Scene tableViewScene = new Scene(tableViewParent);
         BookingButtonController controller = loader.getController();
-        
+
 //controller.initCustomerData(klant);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();        
+
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(tableViewScene);
         window.show();
-        
+
     }
-    
+
     @FXML
     private void checkInputsKey(KeyEvent event) {
-        
-        if(nameField.getText().isEmpty() || firstNameField.getText().isEmpty()||bdayPicker.getValue() == null ){
+
+        if (nameField.getText().isEmpty() || firstNameField.getText().isEmpty() || bdayPicker.getValue() == null) {
             CheckBtn.setDisable(true);
         } else {
             CheckBtn.setDisable(false);
-        } 
+        }
 
     }
-    
+
     @FXML
     private void checkInputsMouse(MouseEvent event) {
-        
-        if(nameField.getText().isEmpty() || firstNameField.getText().isEmpty()||bdayPicker.getValue() == null ){
+
+        if (nameField.getText().isEmpty() || firstNameField.getText().isEmpty() || bdayPicker.getValue() == null) {
             CheckBtn.setDisable(true);
         } else {
             CheckBtn.setDisable(false);
-        } 
+        }
 
     }
-    
+
     @FXML
     private void checkModifyKey(KeyEvent event) {
-        
-        if(!ChangeName.getText().isEmpty() || !ChangeFirstName.getText().isEmpty()|| !ChangeCountry.getText().isEmpty() || !ChangePassport.getText().isEmpty() ){
+
+        if (!ChangeName.getText().isEmpty() || !ChangeFirstName.getText().isEmpty() || !ChangeCountry.getText().isEmpty() || !ChangePassport.getText().isEmpty()) {
             CheckBtn.setDisable(false);
             ModifyBtn.setDisable(false);
             ModifyBookBtn.setDisable(false);
@@ -194,14 +194,9 @@ public class ModifyCustomerController implements Initializable {
             CheckBtn.setDisable(true);
             ModifyBtn.setDisable(true);
             ModifyBookBtn.setDisable(true);
-        } 
+        }
 
     }
 
-      
-
-    
-
-    
 
 }

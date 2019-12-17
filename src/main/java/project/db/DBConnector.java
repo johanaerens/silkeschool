@@ -37,11 +37,11 @@ public class DBConnector {
             throw new DBException(ex);
         }
     }
-    
+
     public static void closeConnection(Connection con) {
         try {
-		 if(con != null)
-            	con.close();
+            if (con != null)
+                con.close();
         } catch (SQLException sqle) {
             //do nothing
         }

@@ -62,6 +62,8 @@ public class ModifyCustomerController implements Initializable {
     @FXML
     private Button ModifyBtn;
 
+    Customer klant;
+
 
     /**
      * Initializes the controller class.
@@ -74,10 +76,8 @@ public class ModifyCustomerController implements Initializable {
         ModifyBookBtn.setDisable(true);
     }
 
-    Customer klant;
-
     @FXML
-    private void CheckCustomer(ActionEvent event) throws IOException {
+    private void checkCustomer(ActionEvent event) throws IOException {
 
         try {
             labelFound.setText("");

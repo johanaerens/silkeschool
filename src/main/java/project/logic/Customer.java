@@ -236,7 +236,7 @@ public class Customer {
         double prijsVanDeBoeking;
         prijsVanDeBoeking = b.getTotalPrice();
         String customerID = b.getCustomerID();
-        DBCustomer.toevoegenKost(customerID, prijsVanDeBoeking);
+        DBCustomer.addACost(customerID, prijsVanDeBoeking);
     }
 
     public void aftrekkenVanDeKost(OfficialBooking b) throws DBException, SQLException {

@@ -7,8 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBCustomer {
+
+    private static final Logger LOGGER = Logger.getLogger(DBCustomer.class.getName());
+    private static final String SELECT_NAME_FROM_COUNTRIES = "SELECT name FROM countries ";
+    private static final String UPDATE_CUSTOMERS_SET_OPSTAAND_BEDRAG_S_WHERE_CUSTOMER_ID_S = "UPDATE customers SET opstaandBedrag = '%s'WHERE customerID = '%s'";
+    private static final String SELECT_OPENSTAAND_BEDRAG_FROM_CUSTOMERS_WHERE_CUSTOMER_ID_S = "SELECT openstaandBedrag FROM customers WHERE customerID = '%s'";
+    private static final String UPDATE_CUSTOMERS_SET_OPSTAAND_BEDRAG_S_WHERE_CUSTOMER_ID_S1 = "UPDATE customers SET opstaandBedrag = '%s'WHERE customerID = '%s'";
 
     //krijgt landcode en retourneert het land
     public static String getCountry(String landcode) throws DBException {
@@ -25,7 +33,7 @@ public class DBCustomer {
             }
             return country;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCountry", ex);
             throw new DBException(ex);
         }
     }
@@ -49,10 +57,9 @@ public class DBCustomer {
             } else {
                 return null;
             }
-            Customer customer = new Customer(firstName, lastName, dateOfBirth, pasportNRAndCountry);
-            return customer;
+            return new Customer(firstName, lastName, dateOfBirth, pasportNRAndCountry);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomer", ex);
             throw new DBException(ex);
         }
     }
@@ -86,7 +93,7 @@ public class DBCustomer {
                 stmt.executeUpdate(sql3);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in saveCustomer", ex);
             throw new DBException(ex);
         }
     }
@@ -99,7 +106,7 @@ public class DBCustomer {
                     + "WHERE customerID = '" + c.getCustomerID() + "'";
             stmt.executeUpdate(sql);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in deleteCustomer", ex);
             throw new DBException(ex);
         }
     }
@@ -126,7 +133,7 @@ public class DBCustomer {
                 return null;
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomer", ex);
             throw new DBException(ex);
         }
     }
@@ -143,10 +150,10 @@ public class DBCustomer {
             }
             return customers;
         } catch (DBException dbe) {
-            dbe.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomers", dbe);
             throw dbe;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomers", ex);
             throw new DBException(ex);
         }
     }
@@ -169,7 +176,7 @@ public class DBCustomer {
                 return null;
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomerGui", ex);
 
             throw new DBException(ex);
         }
@@ -190,7 +197,7 @@ public class DBCustomer {
             }
             return gevonden;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in containsCustomer", ex);
             throw new DBException(ex);
         }
     }
@@ -203,7 +210,7 @@ public class DBCustomer {
                     + "WHERE customerID = '" + custID + "'";
             stmt.executeUpdate(sql);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in changeFirstName", ex);
             throw new DBException(ex);
         }
     }
@@ -255,7 +262,7 @@ public class DBCustomer {
             }
             return country;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomerCountry", ex);
             throw new DBException(ex);
         }
     }
@@ -277,7 +284,7 @@ public class DBCustomer {
 
             return country;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getCustomerPasportNR", ex);
             throw new DBException(ex);
         }
     }
@@ -286,8 +293,7 @@ public class DBCustomer {
         try {
             Statement stmt = MainProject.con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
-            String sql = "SELECT name "
-                    + "FROM countries ";
+            String sql = SELECT_NAME_FROM_COUNTRIES;
 
             ResultSet srs = stmt.executeQuery(sql);
             ArrayList<String> namenCountries = new ArrayList<String>();
@@ -297,31 +303,25 @@ public class DBCustomer {
             }
             return namenCountries;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error in getAllCountries", ex);
             throw new DBException(ex);
         }
     }
 
-    public static void toevoegenKost(String custID, double openstaandBedrag) throws DBException, SQLException {
+    public static void addACost(String custID, double openstaandBedrag) throws DBException, SQLException {
         Statement stmt = MainProject.con.createStatement();
-        String sql = "UPDATE customers "
-                + "SET opstaandBedrag = '" + openstaandBedrag + "'"
-                + "WHERE customerID = '" + custID + "'";
+        String sql = String.format(UPDATE_CUSTOMERS_SET_OPSTAAND_BEDRAG_S_WHERE_CUSTOMER_ID_S, openstaandBedrag, custID);
         stmt.executeUpdate(sql);
     }
 
     public static void aftrekkenKost(String custID, double afTeTrekkenKost) throws DBException, SQLException {
         Statement stmt = MainProject.con.createStatement();
-        String sql = "SELECT openstaandBedrag "
-                + "FROM customers "
-                + "WHERE customerID = '" + custID + "'";
+        String sql = String.format(SELECT_OPENSTAAND_BEDRAG_FROM_CUSTOMERS_WHERE_CUSTOMER_ID_S, custID);
 
         ResultSet srs = stmt.executeQuery(sql);
         double oudOpenstaandBedrag = srs.getInt("openstaandBedrag");
         double nieuwOpenstaandBedrag = oudOpenstaandBedrag - afTeTrekkenKost;
-        String sql2 = "UPDATE customers "
-                + "SET opstaandBedrag = '" + nieuwOpenstaandBedrag + "'"
-                + "WHERE customerID = '" + custID + "'";
+        String sql2 = String.format(UPDATE_CUSTOMERS_SET_OPSTAAND_BEDRAG_S_WHERE_CUSTOMER_ID_S1, nieuwOpenstaandBedrag, custID);
         stmt.executeUpdate(sql2);
     }
 }

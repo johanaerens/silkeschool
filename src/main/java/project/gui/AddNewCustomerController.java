@@ -39,6 +39,7 @@ import java.util.logging.Logger;
  */
 public class AddNewCustomerController implements Initializable {
 
+    private static final Logger LOGGER = Logger.getLogger(AddNewCustomerController.class.getName());
     @FXML
     private TextField nameField;
     @FXML
@@ -115,7 +116,7 @@ public class AddNewCustomerController implements Initializable {
     }
 
     @FXML
-    private void AddCustomer(ActionEvent event) {
+    private void addCustomer(ActionEvent event) {
         try {
             String name = nameField.getText();
             String firstName = firstNameField.getText();
@@ -131,25 +132,25 @@ public class AddNewCustomerController implements Initializable {
             window.setScene(tableViewScene);
             window.show();
         } catch (IOException ex) {
-            Logger.getLogger(AddNewCustomerController.class.getName()).log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    private void AddAndBook(ActionEvent event) throws IOException {
+    private void addAndBook(ActionEvent event) throws IOException {
         String firstName = firstNameField.getText();
         String name = nameField.getText();
         String dateOfBirth = bdayPicker.getValue().toString();
         String country = CountryBox.getValue();
         String pasport = passportField.getText();
-        Customer klant = new Customer(name, firstName, dateOfBirth, country, pasport);
-        klant.addCustomer(klant);
+        Customer customer = new Customer(name, firstName, dateOfBirth, country, pasport);
+        customer.addCustomer(customer);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("BookingButton.fxml"));
         Parent tableViewParent = loader.load();
         BookingButtonController bookingbuttoncontroller = loader.getController();
-        bookingbuttoncontroller.initCustomer(klant);
+        bookingbuttoncontroller.initCustomer(customer);
 
         Scene tableViewScene = new Scene(tableViewParent);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

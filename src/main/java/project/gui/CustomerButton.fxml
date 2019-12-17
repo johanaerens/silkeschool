@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.gui.CustomerButtonController">
+   <children>
+      <VBox layoutX="120.0" layoutY="-2.0" prefHeight="400.0" prefWidth="484.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#AddNewCustomer" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="New customer" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#ModifyCustomer" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Modify customer" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#DeleteCustomer" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Delete customer" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#RetrieveCustomer" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="Retrieve customer" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#SeeAllCustomers" prefHeight="50.0" prefWidth="150.0" style="-fx-background-radius: 10;" text="See all customers" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+   </children>
+</AnchorPane>

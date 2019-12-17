@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="415.0" prefWidth="612.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.gui.SeeAllCustomersController">
+   <center>
+      <TableView fx:id="tableView" maxHeight="400.0" prefHeight="350.0" prefWidth="612.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="CustomerIDCol" minWidth="100.0" prefWidth="155.5" text="Customer ID" />
+            <TableColumn fx:id="FirstNameCol" minWidth="0.0" prefWidth="113.5" text="First Name" />
+          <TableColumn fx:id="LastNameCol" minWidth="0.0" prefWidth="10.0" text="Last Name" />
+            <TableColumn fx:id="DateOfBirthCol" minWidth="0.0" prefWidth="87.0" text="Date of Birth" />
+            <TableColumn fx:id="CountryCol" minWidth="0.0" prefWidth="52.5" text="Country" />
+            <TableColumn fx:id="PassPortNrCol" minWidth="0.0" prefWidth="76.0" text="PassPort Nr" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </TableView>
+   </center>
+   <bottom>
+      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#DoneButton" style="-fx-background-radius: 10;" text="Home" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="SelectAndBookBttn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#SelectAndBook" prefHeight="25.0" prefWidth="213.0" style="-fx-background-radius: 10;" text="Select and Book Flights" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="SelectedCustomerLabel" layoutX="10.0" layoutY="16.0" maxWidth="1.7976931348623157E308" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

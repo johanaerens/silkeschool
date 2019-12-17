@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.gui.FlightDetailsController">
+   <center>
+      <GridPane prefHeight="300.0" prefWidth="600.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.5" minWidth="10.0" prefWidth="150.5" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.5" minWidth="0.0" prefWidth="141.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="147.5" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.5" minWidth="10.0" prefWidth="135.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="157.5" minWidth="10.0" prefWidth="146.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.5" minWidth="10.0" prefWidth="125.5" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="Label01" layoutX="110.0" layoutY="78.0" GridPane.rowIndex="2" />
+            <Label fx:id="Label02" GridPane.rowIndex="3" />
+            <Label fx:id="Label03" GridPane.rowIndex="4" />
+            <Label fx:id="Label04" GridPane.rowIndex="5" />
+            <Label fx:id="Label05" GridPane.rowIndex="6" />
+            <Label fx:id="Label06" prefHeight="17.0" prefWidth="217.0" GridPane.rowIndex="7" />
+            <Label fx:id="Label10" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="Label11" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="Label12" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label fx:id="Label13" layoutX="110.0" layoutY="129.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="Label14" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Label fx:id="Label15" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="Label20" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="Label21" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="Label22" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Label fx:id="Label23" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label fx:id="Label24" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+            <Label fx:id="Label25" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+            <Label fx:id="Label26" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Label fx:id="Label30" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label fx:id="Label31" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label fx:id="Label32" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label fx:id="Label33" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+            <Label fx:id="Label34" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+            <Label fx:id="Label35" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+            <Label fx:id="Label36" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+            <Label fx:id="Label40" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label fx:id="Label41" layoutX="410.0" layoutY="27.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label fx:id="Label42" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+            <Label fx:id="Label43" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Label fx:id="Label44" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+            <Label fx:id="Label45" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+            <Label fx:id="Label46" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+            <Label fx:id="Label50" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label fx:id="Label51" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Label fx:id="Label52" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+            <Label fx:id="Label53" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Label fx:id="Label54" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+            <Label fx:id="Label55" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+            <Label fx:id="Label56" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+            <Label fx:id="Label00" GridPane.rowIndex="1" />
+            <Label fx:id="Label001" layoutX="10.0" layoutY="80.0" />
+            <Label text="FlightNR" />
+            <Label text="Departure" GridPane.columnIndex="1" />
+            <Label text="Arrival" GridPane.columnIndex="2" />
+            <Label text="Duration" GridPane.columnIndex="3" />
+            <Label text="Price" GridPane.columnIndex="4" />
+            <Label text="CO2" GridPane.columnIndex="5" />
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </center>
+   <top>
+      <Label fx:id="titleLabel" text="Titel" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="600.0" spacing="30.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="CloseBtn" alignment="CENTER" mnemonicParsing="false" onAction="#Close" prefWidth="75.0" text="Close" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
